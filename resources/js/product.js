@@ -1,17 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
     const categoriesWrapper = document.querySelector("#categories-wrapper");
-    const categoriesButton = categoriesWrapper.querySelector(".categories");
-    const categoriesArrow = categoriesButton.querySelector(".categories-arrow");
-    const categoriesOption =
-        categoriesWrapper.querySelector(".categories-option");
+    
+    if (categoriesWrapper) {
+        const categoriesButton = categoriesWrapper.querySelector(".categories");
+        const categoriesArrow = categoriesButton?.querySelector(".categories-arrow");
+        const categoriesOption = categoriesWrapper.querySelector(".categories-option");
 
-    categoriesButton.addEventListener("click", () => {
-        categoriesWrapper.classList.toggle("menu-open");
+        if (categoriesButton) {
+            categoriesButton.addEventListener("click", () => {
+                categoriesWrapper.classList.toggle("menu-open");
 
-        categoriesArrow.classList.toggle("rotate-180");
-        categoriesOption.classList.toggle("rounded-b-2xl");
-    });
-
+                if (categoriesArrow) {
+                    categoriesArrow.classList.toggle("rotate-180");
+                }
+                if (categoriesOption) {
+                    categoriesOption.classList.toggle("rounded-b-2xl");
+                }
+            });
+        }
+    }
 
     const addedCartIndicator = document.querySelector(".added-cart-indicator");
 

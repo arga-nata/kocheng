@@ -3,17 +3,10 @@
 
     <div class="max-w-4xl mx-auto px-6 py-10">
         <div class="bg-white p-8 rounded-2xl shadow-sm ring-1 ring-secondary/10">
-            <h1 class="font-serif text-3xl font-bold text-primary mb-6 border-t border-secondary/50 border-dashed pt-5">Detail Pembayaran</h1>
+            <h1 class="font-serif text-3xl font-bold text-primary mb-6 border-t border-secondary/50 border-dashed pt-5">
+                Detail Pembayaran</h1>
 
-        <form action="{{ route('dashboard.user.payment.store') }}" method="POST" class="space-y-6">
-            @csrf
-            <div class="grid grid-cols-3 gap-3">
-                @foreach (['qris' => 'QRIS', 'ovo' => 'OVO', 'dana' => 'DANA', 'paypal' => 'PayPal', 'bayar ditempat' => 'Bayar di Tempat'] as $value => $label)
-                    <label class="border border-black/10 rounded-xl p-4 text-center text-sm font-semibold cursor-pointer has-checked:border-accent has-checked:bg-accent/10">
-                        <input type="radio" name="payment_method" value="{{ $value }}" class="hidden" @checked($loop->first)>
-                        {{ $label }}
-                    </label>
-                @endforeach
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
                     <h3 class="text-sm uppercase tracking-wider text-secondary font-semibold mb-1">Tanggal Invoice</h3>
@@ -26,18 +19,21 @@
             </div>
 
             <div class="mb-8">
-                <h2 class="text-2xl font-bold text-primary mb-4 border-t border-secondary/50 border-dashed pt-5">Item Transaksi</h2>
+                <h2 class="text-2xl font-bold text-primary mb-4 border-t border-secondary/50 border-dashed pt-5">Item
+                    Transaksi</h2>
                 <div class="bg-neutral rounded-xl p-4 shadow-sm overflow-hidden space-y-3">
                     @foreach ($products as $product)
                         @php $quantity = $cart[$product->id]; @endphp
                         <div class="flex justify-between items-center p-3 bg-white rounded-xl border border-black/5">
                             <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
                                     <span class="icon-[mdi--paw] text-xl text-accent"></span>
                                 </div>
                                 <div>
                                     <p class="font-bold text-sm text-primary">{{ $product->name }}</p>
-                                    <p class="text-xs text-secondary">{{ $quantity }}x {{ $product->formatted_price }}</p>
+                                    <p class="text-xs text-secondary">{{ $quantity }}x
+                                        {{ $product->formatted_price }}</p>
                                 </div>
                             </div>
                             <p class="font-bold text-sm text-primary">
@@ -56,7 +52,8 @@
             </div>
 
             <div class="bg-secondary/5 border border-secondary/20 rounded-2xl p-8 text-center mb-8">
-                <h3 class="text-lg font-bold text-primary mb-4 uppercase">Metode Pembayaran: {{ strtoupper($paymentMethod) }}</h3>
+                <h3 class="text-lg font-bold text-primary mb-4 uppercase">Metode Pembayaran:
+                    {{ strtoupper($paymentMethod) }}</h3>
 
                 @if ($paymentMethod === 'bayar ditempat')
                     <div class="flex flex-col items-center gap-4">
@@ -64,7 +61,8 @@
                             <img src="https://quickchart.io/qr?text=https://www.youtube.com/watch?v=hvL1339luv0&list=RDhvL1339luv0&start_radio=1&size=200"
                                 alt="QR Code" class="w-40 h-40">
                         </div>
-                        <p class="text-lg text-secondary">Silakan tunjukkan <span class="font-bold text-primary">kode ini</span> kepada kasir saat tiba di toko.</p>
+                        <p class="text-lg text-secondary">Silakan tunjukkan <span class="font-bold text-primary">kode
+                                ini</span> kepada kasir saat tiba di toko.</p>
                     </div>
                 @else
                     <div class="flex flex-col items-center gap-4">
@@ -77,7 +75,8 @@
                 @endif
             </div>
 
-            <form action="{{ route('dashboard.user.payment.store') }}" method="POST" class="flex gap-4 justify-center border-t border-secondary/50 border-dashed pt-5 border-b pb-5">
+            <form action="{{ route('dashboard.user.payment.store') }}" method="POST"
+                class="flex gap-4 justify-center border-t border-secondary/50 border-dashed pt-5 border-b pb-5">
                 @csrf
                 <input type="hidden" name="payment_method" value="{{ $paymentMethod }}">
                 <a href="{{ route('dashboard.user.cart') }}"
